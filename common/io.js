@@ -32,7 +32,7 @@ export function save(file) {
   console.log(opts);
 
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.set(opts, () => {
+    chrome.storage.local.set(opts, () => {
       if(chrome.runtime.lastError) return reject(new Error(chrome.runtime.lastError.message));
       resolve();
     });
@@ -41,7 +41,7 @@ export function save(file) {
 
 function getStorage(key) {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.get(key, (res) => {
+    chrome.storage.local.get(key, (res) => {
       if(chrome.runtime.lastError) return reject(new Error(chrome.runtime.lastError.message));
       console.log('getStorage', key, '=>', res);
       if(typeof key === 'string') resolve(res[key]);
@@ -81,7 +81,7 @@ export function clean() {
           keys.push('db'+length);
         }
         return new Promise((resolve, reject) => {
-          chrome.storage.sync.remove(keys, () => {
+          chrome.storage.local.remove(keys, () => {
             if(chrome.runtime.lastError) return reject(new Error(chrome.runtime.lastError.message));
             resolve();
           });

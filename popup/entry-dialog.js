@@ -3,6 +3,8 @@ import React from 'react';
 import Icon from '../common/icon';
 import {Dialog} from './dialog';
 
+import {Entry} from 'keepass';
+
 const Input = ({id, type = 'text', value = '', onChange, placeholder = '', tag = 'input', label}) => {
   let _tag = tag;
   return (
@@ -78,26 +80,38 @@ export const EntryDialog = React.createClass({
     this.props.onClose();
   },
 
+  attributeInput(attr) {
+    let key = attr.key;
+    let props = defaultAttrProps[key] || {};
+    props.value = attr.value;
+    props.id = "string-"+key;
+    props.label = key;
+    props.key = key;
+    props.onChange = this.update.bind(this, key);
+    if(attr.protected)
+      return <ProtectedInput {...props}/>
+    else
+      return <Input {...props}/>
+  },
+
   render() {
     let entry = this.props.entry;
-    //TODO for password need something better then text or password input
     return (
       <Dialog onClose={this.props.onClose}>
         <form className="form-horizontal">
           {
-            entry.attributes.map((attr) => {
-              let key = attr.key;
-              let props = defaultAttrProps[key] || {};
-              props.value = attr.value;//TODO protected
-              props.id = "string-"+key;
-              props.label = key;
-              props.key = key;
-              props.onChange = this.update.bind(this, key);
-              if(attr.protected)
-                return <ProtectedInput {...props}/>
-              else
-                return <Input {...props}/>
+            Entry.DEFAULT_ATTRIBUTES.map(name => {
+              return this.attributeInput(entry.attribute(name));
             })
+          }
+          {
+            entry.attributes
+              .filter(attr =>
+                Entry.DEFAULT_ATTRIBUTES.indexOf(attr.key) < 0
+              )
+              .map(attr =>
+                this.attributeInput(attr)
+              )
           }
           <div className="form-group">
             <button className="btn btn-success btn-block" onClick={this.onOk}>Ok</button>

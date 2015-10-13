@@ -65,7 +65,8 @@ const KeyGenOption = React.createClass({
           <button
             className="btn btn-primary"
             onClick={this.beginKeyGeneration}
-            disabled={!!this.state.generatingKey}>
+            disabled={!!this.state.generatingKey}
+          >
               Generate new key
           </button>
         </Col>
@@ -78,7 +79,10 @@ const KeyGenOption = React.createClass({
                   href={this.state.keyUrl}
                   download={this.props.fileName}
                   onClick={this.releaseUrl}
-                  className="btn btn-link">Download key</a>
+                  className="btn btn-link"
+                >
+                  Download key
+                </a>
           }
         </Col>
       </Row>
@@ -162,8 +166,8 @@ const Options = React.createClass({
     this.setState({
       loadingDatabase: false,
       uploadingDatabase: false,
-      database: db,
-      databaseUrl: URL.createObjectURL(new Blob([db.content]))
+      database: db || null,
+      databaseUrl: db && URL.createObjectURL(new Blob([db.content])) || null
     })
   },
 

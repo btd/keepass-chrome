@@ -37,6 +37,9 @@ export const GroupView = React.createClass({
 
   groupTitle(group) {
     let iconName = iconMap(group.icon);
+    if(group.expired()) {
+      iconName = iconMap(Icon.Clock);
+    }
     return (
       <h5 onClick={this.toggleExpand} onMouseOver={this.showGroupMenu} onMouseOut={this.hideGroupMenu}>
         <Icon name={group.expanded ? "angle-down" : "angle-right"} fixed  /> {iconName && <Icon name={iconName} fixed large />} {group.name}
@@ -66,6 +69,9 @@ export const GroupView = React.createClass({
 
   entryTitle(entry) {
     let iconName = iconMap(entry.icon);
+    if(entry.expired()) {
+      iconName = iconMap(Icon.Clock);
+    }
     let title = entry.url ?
       <a href={entry.url} onClick={() => chrome.tabs.create({ url: entry.url })}>{entry.title}</a> :
       entry.title;

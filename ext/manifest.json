@@ -31,7 +31,8 @@
   "permissions": [
     "activeTab",
     "storage",
-    "clipboardWrite"
+    "clipboardWrite",
+    "unlimitedStorage"
   ],
 
   "background": {

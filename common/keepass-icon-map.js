@@ -40,7 +40,7 @@ const map = {
   [Icon.Archive]: null,
   [Icon.Homebanking]: null,
   [Icon.DriveWindows]: null,
-  [Icon.Clock]: null,
+  [Icon.Clock]: "clock-o",
   [Icon.EMailSearch]: null,
   [Icon.PaperFlag]: null,
   [Icon.Memory]: null,
