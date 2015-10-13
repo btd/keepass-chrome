@@ -1,0 +1,86 @@
+@charset 'utf-8';
+@import './node_modules/bootstrap/less/bootstrap';
+@import './node_modules/font-awesome/less/font-awesome';
+
+.absolute-center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.center-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+}
+
+.credentials-form {
+  width: 400px;
+}
+
+.dialog {
+  position: absolute;
+
+  z-index: 100;
+
+  top: 0;
+  bottom: 0;
+
+  left: 0;
+  right: 0;
+
+  background-color: rgba(255, 255, 255, 0.9);
+
+  .close {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+  }
+
+  form {
+    width: 400px;
+  }
+}
+
+
+
+.block {
+  margin: 15px;
+}
+
+.group {
+  h5 {
+    cursor: pointer;
+
+    margin: 2px 0;
+  }
+
+  h5, span.group-entry {
+    line-height: 1.8em;
+
+    & .inline-menu {
+      display: none;
+    }
+
+    &:hover .inline-menu {
+      display: inline-block;
+    }
+  }
+
+  .inline-menu--item {
+    display: inline-block;
+    margin-left: 10px;
+
+    cursor: pointer;
+  }
+
+  .group-entry {
+    display: block;
+
+    margin-left: 2em;
+  }
+}
